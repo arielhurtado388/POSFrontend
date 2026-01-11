@@ -14,6 +14,8 @@ export const CategoriaSchema = z.object({
   nombre: z.string(),
 });
 
+export const CategoriaResponseSchema = z.array(CategoriaSchema);
+
 export const CategoriaConProductosResponseSchema = CategoriaSchema.extend({
   productos: z.array(ProductoSchema),
 });
