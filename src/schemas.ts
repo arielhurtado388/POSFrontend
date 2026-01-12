@@ -20,5 +20,19 @@ export const CategoriaConProductosResponseSchema = CategoriaSchema.extend({
   productos: z.array(ProductoSchema),
 });
 
+// Carrito
+const ContenidoCarritoComprasSchema = ProductoSchema.pick({
+  nombre: true,
+  imagen: true,
+  precio: true,
+  inventario: true,
+}).extend({
+  productoId: z.number(),
+  cantidad: z.number(),
+});
+
+export const CarritoComprasSchema = z.array(ContenidoCarritoComprasSchema);
+
 // Types
 export type Producto = z.infer<typeof ProductoSchema>;
+export type CarritoCompras = z.infer<typeof CarritoComprasSchema>;
