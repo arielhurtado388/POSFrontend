@@ -12,6 +12,7 @@ export default function ProductoCard({ producto }: { producto: Producto }) {
           alt={`${producto.nombre}`}
           width={400}
           height={600}
+          loading="eager"
           unoptimized
         />
 

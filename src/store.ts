@@ -6,6 +6,8 @@ interface Tienda {
   total: number;
   contenido: CarritoCompras;
   agregarAlCarrito: (producto: Producto) => void;
+  actualizarCantidad: (id: Producto["id"], cantidad: number) => void;
+  eliminarDelCarrito: (id: Producto["id"]) => void;
 }
 
 export const useTienda = create<Tienda>()(
@@ -48,6 +50,19 @@ export const useTienda = create<Tienda>()(
 
       set(() => ({
         contenido,
+      }));
+    },
+    actualizarCantidad: (id, cantidad) => {
+      const contenido = get().contenido.map((item) =>
+        item.productoId === id ? { ...item, cantidad } : item
+      );
+      set(() => ({
+        contenido,
+      }));
+    },
+    eliminarDelCarrito: (id) => {
+      set((state) => ({
+        contenido: state.contenido.filter((item) => item.productoId !== id),
       }));
     },
   }))
