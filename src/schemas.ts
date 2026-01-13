@@ -36,3 +36,4 @@ export const CarritoComprasSchema = z.array(ContenidoCarritoComprasSchema);
 // Types
 export type Producto = z.infer<typeof ProductoSchema>;
 export type CarritoCompras = z.infer<typeof CarritoComprasSchema>;
+export type Item = z.infer<typeof ContenidoCarritoComprasSchema>;
