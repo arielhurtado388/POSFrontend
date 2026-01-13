@@ -3,13 +3,25 @@ import { formatearMoneda } from "@/src/utils";
 type CantidadProps = {
   titulo: string;
   cantidad: number;
+  descuento?: boolean;
 };
 
-export default function Cantidad({ titulo, cantidad }: CantidadProps) {
+export default function Cantidad({
+  titulo,
+  cantidad,
+  descuento,
+}: CantidadProps) {
   return (
-    <div className="flex justify-between">
+    <div
+      className={`${
+        descuento && "bg-green-300 text-green-900"
+      } flex justify-between p-1`}
+    >
       <dt className="font-bold">{titulo}</dt>
-      <dd className="text-gray-900">{formatearMoneda(cantidad)}</dd>
+      <dd className="text-gray-900">
+        {descuento && "-"}
+        {formatearMoneda(cantidad)}
+      </dd>
     </div>
   );
 }

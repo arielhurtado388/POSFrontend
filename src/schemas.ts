@@ -32,8 +32,14 @@ const ContenidoCarritoComprasSchema = ProductoSchema.pick({
 });
 
 export const CarritoComprasSchema = z.array(ContenidoCarritoComprasSchema);
+export const CuponResponseSchema = z.object({
+  nombre: z.string().default(""),
+  message: z.string(),
+  porcentaje: z.coerce.number().min(0).max(100).default(0),
+});
 
 // Types
 export type Producto = z.infer<typeof ProductoSchema>;
 export type CarritoCompras = z.infer<typeof CarritoComprasSchema>;
 export type Item = z.infer<typeof ContenidoCarritoComprasSchema>;
+export type Cupon = z.infer<typeof CuponResponseSchema>;
