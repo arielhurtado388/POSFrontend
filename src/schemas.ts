@@ -63,8 +63,26 @@ export const ErrorResponseSchema = z.object({
   statusCode: z.number(),
 });
 
+export const ContenidoSchema = z.object({
+  id: z.number(),
+  cantidad: z.number(),
+  precio: z.string(),
+  producto: ProductoSchema,
+});
+export const VentaResponseSchema = z.object({
+  id: z.number(),
+  total: z.string(),
+  fecha: z.string(),
+  descuento: z.string().nullable(),
+  cupon: z.string().nullable(),
+  contenido: z.array(ContenidoSchema),
+});
+
+export const VentasResponseSchema = z.array(VentaResponseSchema);
+
 // Types
 export type Producto = z.infer<typeof ProductoSchema>;
 export type CarritoCompras = z.infer<typeof CarritoComprasSchema>;
 export type Item = z.infer<typeof ContenidoCarritoComprasSchema>;
 export type Cupon = z.infer<typeof CuponResponseSchema>;
+export type Venta = z.infer<typeof VentaResponseSchema>;
