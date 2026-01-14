@@ -4,6 +4,7 @@ import { useTienda } from "@/src/store";
 import ItemCarrito from "./ItemCarrito";
 import Cantidad from "./Cantidad";
 import CuponForm from "./CuponForm";
+import EnviarOrdenForm from "./EnviarOrdenForm";
 
 export default function CarritoCompras() {
   const contenido = useTienda((state) => state.contenido);
@@ -35,6 +36,7 @@ export default function CarritoCompras() {
             <Cantidad titulo="Total a pagar" cantidad={total} />
           </dl>
           <CuponForm />
+          <EnviarOrdenForm />
         </>
       ) : (
         <p className="text-center text-xl text-gray-900">

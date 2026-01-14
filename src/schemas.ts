@@ -32,10 +32,35 @@ const ContenidoCarritoComprasSchema = ProductoSchema.pick({
 });
 
 export const CarritoComprasSchema = z.array(ContenidoCarritoComprasSchema);
+
 export const CuponResponseSchema = z.object({
   nombre: z.string().default(""),
   message: z.string(),
   porcentaje: z.coerce.number().min(0).max(100).default(0),
+});
+
+const OrdenContenidoSchema = z.object({
+  productoId: z.number(),
+  cantidad: z.number(),
+  precio: z.number(),
+});
+
+export const OrdenSchema = z.object({
+  total: z.number(),
+  cupon: z.string(),
+  contenido: z
+    .array(OrdenContenidoSchema)
+    .min(1, { message: "El carrito no puede ir vacío" }),
+});
+
+// Respuestas
+export const SuccessResponseSchema = z.object({
+  message: z.string(),
+});
+export const ErrorResponseSchema = z.object({
+  message: z.array(z.string()),
+  error: z.string(),
+  statusCode: z.number(),
 });
 
 // Types

@@ -1,5 +1,6 @@
 import CarritoCompras from "@/components/carrito/CarritoCompras";
 import MainNav from "@/components/ui/MainNav";
+import Notificacion from "@/components/ui/Notificacion";
 
 export default function RootLayout({
   children,
@@ -17,6 +18,7 @@ export default function RootLayout({
           <CarritoCompras />
         </aside>
       </main>
+      <Notificacion />
     </>
   );
 }
