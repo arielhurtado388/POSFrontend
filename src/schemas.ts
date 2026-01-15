@@ -53,6 +53,20 @@ export const OrdenSchema = z.object({
     .min(1, { message: "El carrito no puede ir vacío" }),
 });
 
+export const ProductoFormSchema = z.object({
+  nombre: z
+    .string()
+    .min(1, { message: "El nombre del producto no puede ir vacío" }),
+  precio: z.coerce
+    .number({ message: "El precio no es válido" })
+    .min(1, { message: "El precio debe ser mayor a 0" }),
+  inventario: z.coerce
+    .number({ message: "El inventario no es válido" })
+    .min(1, { message: "El inventario debe ser mayor a 0" }),
+  categoriaId: z.coerce
+    .number({ message: "La categoría no es válida" })
+    .min(1, { message: "Debes seleccionar una categoría" }),
+});
 // Respuestas
 export const SuccessResponseSchema = z.object({
   message: z.string(),
