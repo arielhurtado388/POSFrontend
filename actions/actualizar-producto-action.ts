@@ -1,13 +1,18 @@
 "use server";
 
-import { ErrorResponseSchema, ProductoFormSchema } from "@/src/schemas";
+import {
+  ErrorResponseSchema,
+  Producto,
+  ProductoFormSchema,
+} from "@/src/schemas";
 
 type ActionStateType = {
   errores: string[];
   success: string;
 };
 
-export async function agregarProducto(
+export async function actualizarProducto(
+  productoId: Producto["id"],
   prevState: ActionStateType,
   datosForm: FormData
 ) {
@@ -25,9 +30,9 @@ export async function agregarProducto(
     };
   }
 
-  const url = `${process.env.API_URL}/productos`;
+  const url = `${process.env.API_URL}/productos/${productoId}`;
   const req = await fetch(url, {
-    method: "POST",
+    method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
@@ -51,6 +56,6 @@ export async function agregarProducto(
 
   return {
     errores: [],
-    success: "Producto agregado correctamente",
+    success: "Producto actualizado correctamente",
   };
 }
