@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { CategoriaResponseSchema, Producto } from "@/src/schemas";
 import CargarImagenProducto from "./CargarImagenProducto";
 
