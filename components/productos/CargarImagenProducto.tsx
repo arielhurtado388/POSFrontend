@@ -1,10 +1,13 @@
 "use client";
 
 import { cargarImagen } from "@/actions/cargar-imagen-action";
-import { useCallback } from "react";
+import Image from "next/image";
+import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
 export default function CargarImagenProducto() {
+  const [imagen, setImagen] = useState("");
+
   const onDrop = useCallback(async (files: File[]) => {
     const datosForm = new FormData();
     files.forEach((file) => {
@@ -12,7 +15,7 @@ export default function CargarImagenProducto() {
     });
 
     const imagen = await cargarImagen(datosForm);
-    console.log(imagen);
+    setImagen(imagen);
   }, []);
 
   const {
@@ -54,6 +57,21 @@ export default function CargarImagenProducto() {
           {!isDragActive && <p>Arrastra y suelta una imagen aquí</p>}
         </div>
       </div>
+
+      {imagen && (
+        <div className="py-5 space-y-3">
+          <p className="font-bold">Imagen Subida</p>
+          <div className="w-75 h-105 relative">
+            <Image
+              className="object-cover"
+              src={imagen}
+              alt="Imagen Subida"
+              fill
+            />
+          </div>
+        </div>
+      )}
+      <input type="hidden" name="imagen" defaultValue={imagen} />
     </>
   );
 }
