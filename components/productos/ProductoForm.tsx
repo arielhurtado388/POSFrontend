@@ -1,4 +1,5 @@
 import { CategoriaResponseSchema, Producto } from "@/src/schemas";
+import CargarImagenProducto from "./CargarImagenProducto";
 
 async function obtenerCategorias() {
   const url = `${process.env.API_URL}/categorias`;
@@ -79,6 +80,8 @@ export default async function ProductoForm({
           ))}
         </select>
       </div>
+
+      <CargarImagenProducto />
     </>
   );
 }
