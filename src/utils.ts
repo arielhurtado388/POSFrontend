@@ -23,3 +23,19 @@ export function esPaginaValida(valor: number) {
 
   return true;
 }
+
+export function obtenerRutaImagen(imagen: string) {
+  const cloudinaryBaseUrl = "https://res.cloudinary.com";
+
+  if (imagen.startsWith(cloudinaryBaseUrl)) {
+    return imagen;
+  } else {
+    if (process.env.API_URL) {
+      return `${process.env.API_URL}/img/${imagen}`;
+    } else {
+      return `${process.env.NEXT_PUBLIC_API_URL}/img/${imagen}`;
+    }
+  }
+}
+
+export const estaDisponible = (inventario: number) => inventario > 0;

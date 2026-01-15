@@ -1,11 +1,16 @@
 "use client";
 
 import { cargarImagen } from "@/actions/cargar-imagen-action";
+import { obtenerRutaImagen } from "@/src/utils";
 import Image from "next/image";
 import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
-export default function CargarImagenProducto() {
+export default function CargarImagenProducto({
+  imagenActual,
+}: {
+  imagenActual?: string;
+}) {
   const [imagen, setImagen] = useState("");
 
   const onDrop = useCallback(async (files: File[]) => {
@@ -71,7 +76,28 @@ export default function CargarImagenProducto() {
           </div>
         </div>
       )}
-      <input type="hidden" name="imagen" defaultValue={imagen} />
+
+      {imagenActual && !imagen && (
+        <div className="py-5 space-y-3">
+          <p className="font-bold">Imagen Actual</p>
+          <div className="w-75 h-105 relative">
+            <Image
+              className="object-cover"
+              src={obtenerRutaImagen(imagenActual)}
+              alt="Imagen Actual"
+              fill
+              unoptimized
+              loading="eager"
+            />
+          </div>
+        </div>
+      )}
+
+      <input
+        type="hidden"
+        name="imagen"
+        defaultValue={imagen ? imagen : imagenActual}
+      />
     </>
   );
 }

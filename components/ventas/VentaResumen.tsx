@@ -1,5 +1,5 @@
 import { Venta } from "@/src/schemas";
-import { formatearMoneda } from "@/src/utils";
+import { formatearMoneda, obtenerRutaImagen } from "@/src/utils";
 import Image from "next/image";
 
 export default function VentaResumen({ venta }: { venta: Venta }) {
@@ -18,7 +18,7 @@ export default function VentaResumen({ venta }: { venta: Venta }) {
               <div className="flex items-center space-x-6 ">
                 <div className="relative w-32 h-32">
                   <Image
-                    src={`${process.env.NEXT_PUBLIC_API_URL}/img/${item.producto.imagen}`}
+                    src={obtenerRutaImagen(item.producto.imagen)}
                     alt={`${item.producto.nombre}`}
                     fill
                     unoptimized

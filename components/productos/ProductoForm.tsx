@@ -81,7 +81,7 @@ export default async function ProductoForm({
         </select>
       </div>
 
-      <CargarImagenProducto />
+      <CargarImagenProducto imagenActual={producto?.imagen} />
     </>
   );
 }

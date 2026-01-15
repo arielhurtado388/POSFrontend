@@ -1,6 +1,6 @@
 import { Item } from "@/src/schemas";
 import { useTienda } from "@/src/store";
-import { formatearMoneda } from "@/src/utils";
+import { formatearMoneda, obtenerRutaImagen } from "@/src/utils";
 import Image from "next/image";
 
 export default function ItemCarrito({ item }: { item: Item }) {
@@ -10,7 +10,7 @@ export default function ItemCarrito({ item }: { item: Item }) {
     <li className="flex items-center space-x-6 py-6 relative">
       <div className="h-24 w-24">
         <Image
-          src={`${process.env.NEXT_PUBLIC_API_URL}/img/${item.imagen}`}
+          src={obtenerRutaImagen(item.imagen)}
           alt={`${item.nombre}`}
           width={100}
           height={100}

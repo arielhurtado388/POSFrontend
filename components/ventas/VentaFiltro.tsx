@@ -7,12 +7,12 @@ import { useState } from "react";
 import "react-calendar/dist/Calendar.css";
 import VentaResumen from "./VentaResumen";
 import { formatearMoneda } from "@/src/utils";
-import dynamic from "next/dynamic";
+import Calendar from "react-calendar";
 
 // Cargar componentes 100% en el cliente, sino se puede personalizar como el locale="es" como prop de Calendar
-const Calendar = dynamic(() => import("react-calendar"), {
-  ssr: false,
-});
+// const Calendar = dynamic(() => import("react-calendar"), {
+//   ssr: false,
+// });
 
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
@@ -31,7 +31,7 @@ export default function VentaFiltro() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-10 relative items-start">
       <div className="lg:sticky lg:top-10">
-        <Calendar value={fecha} onChange={setFecha} />
+        <Calendar value={fecha} onChange={setFecha} locale="es" />
       </div>
       <div>
         {isLoading && "Cargando..."}

@@ -1,14 +1,20 @@
 import { Producto } from "@/src/schemas";
-import { formatearMoneda } from "@/src/utils";
+import {
+  estaDisponible,
+  formatearMoneda,
+  obtenerRutaImagen,
+} from "@/src/utils";
 import Image from "next/image";
 import AgregarProductoButton from "./AgregarProductoButton";
 
 export default function ProductoCard({ producto }: { producto: Producto }) {
   return (
     <div className="rounded bg-white shadow relative p-5">
-      <div>
+      <div
+        className={`${!estaDisponible(producto.inventario) && "opacity-40"}`}
+      >
         <Image
-          src={`${process.env.API_URL}/img/${producto.imagen}`}
+          src={obtenerRutaImagen(producto.imagen)}
           alt={`${producto.nombre}`}
           width={400}
           height={600}
@@ -24,7 +30,13 @@ export default function ProductoCard({ producto }: { producto: Producto }) {
           </p>
         </div>
       </div>
-      <AgregarProductoButton producto={producto} />
+      {estaDisponible(producto.inventario) ? (
+        <AgregarProductoButton producto={producto} />
+      ) : (
+        <p className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white opacity-60 w-full text-center py-5 text-2xl uppercase font-black">
+          Agotado
+        </p>
+      )}
     </div>
   );
 }

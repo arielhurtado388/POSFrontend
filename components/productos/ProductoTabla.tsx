@@ -1,5 +1,9 @@
 import { Producto } from "@/src/schemas";
-import { formatearMoneda } from "@/src/utils";
+import {
+  estaDisponible,
+  formatearMoneda,
+  obtenerRutaImagen,
+} from "@/src/utils";
 import Image from "next/image";
 import Link from "next/link";
 import EliminarProductoForm from "./EliminarProductoForm";
@@ -52,7 +56,7 @@ export default function ProductosTabla({
                   <tr key={producto.id}>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                       <Image
-                        src={`${process.env.API_URL}/img/${producto.imagen}`}
+                        src={obtenerRutaImagen(producto.imagen)}
                         alt={`${producto.nombre}`}
                         width={120}
                         height={120}
@@ -67,7 +71,13 @@ export default function ProductosTabla({
                       {formatearMoneda(producto.precio)}
                     </td>
                     <td className="px-3 py-4 text-sm text-gray-500">
-                      {producto.inventario}
+                      {estaDisponible(producto.inventario) ? (
+                        producto.inventario
+                      ) : (
+                        <p className="bg-red-600 rounded-lg px-3 py-1 text-white text-center text-sm uppercase font-bold">
+                          Agotado
+                        </p>
+                      )}
                     </td>
                     <td className="relative py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0 ">
                       <div className="flex gap-5 justify-end items-center">
