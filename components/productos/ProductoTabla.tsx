@@ -2,6 +2,7 @@ import { Producto } from "@/src/schemas";
 import { formatearMoneda } from "@/src/utils";
 import Image from "next/image";
 import Link from "next/link";
+import EliminarProductoForm from "./EliminarProductoForm";
 
 export default function ProductosTabla({
   productos,
@@ -78,13 +79,7 @@ export default function ProductosTabla({
                           <span className="sr-only">, {producto.nombre}</span>
                         </Link>
 
-                        <form>
-                          <input
-                            className="text-red-600 hover:text-red-800 cursor-pointer"
-                            type="submit"
-                            value="Eliminar"
-                          />
-                        </form>
+                        <EliminarProductoForm productoId={producto.id} />
                       </div>
                     </td>
                   </tr>
