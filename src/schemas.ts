@@ -80,6 +80,11 @@ export const VentaResponseSchema = z.object({
 
 export const VentasResponseSchema = z.array(VentaResponseSchema);
 
+export const ProductosResponseSchema = z.object({
+  productos: z.array(ProductoSchema),
+  total: z.number(),
+});
+
 // Types
 export type Producto = z.infer<typeof ProductoSchema>;
 export type CarritoCompras = z.infer<typeof CarritoComprasSchema>;
