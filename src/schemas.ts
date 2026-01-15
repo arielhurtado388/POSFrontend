@@ -60,6 +60,7 @@ export const ProductoFormSchema = z.object({
   precio: z.coerce
     .number({ message: "El precio no es válido" })
     .min(1, { message: "El precio debe ser mayor a 0" }),
+  imagen: z.string("La imagen es obligatoria"),
   inventario: z.coerce
     .number({ message: "El inventario no es válido" })
     .min(1, { message: "El inventario debe ser mayor a 0" }),

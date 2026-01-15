@@ -14,6 +14,7 @@ export async function agregarProducto(
   const producto = ProductoFormSchema.safeParse({
     nombre: datosForm.get("nombre"),
     precio: datosForm.get("precio"),
+    imagen: datosForm.get("imagen"),
     inventario: datosForm.get("inventario"),
     categoriaId: datosForm.get("categoriaId"),
   });
@@ -34,6 +35,7 @@ export async function agregarProducto(
     body: JSON.stringify({
       nombre: producto.data.nombre,
       precio: producto.data.precio,
+      imagen: producto.data.imagen,
       inventario: producto.data.inventario,
       categoriaId: producto.data.categoriaId,
     }),
