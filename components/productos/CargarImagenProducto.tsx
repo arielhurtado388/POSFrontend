@@ -1,8 +1,20 @@
 "use client";
 
+import { cargarImagen } from "@/actions/cargar-imagen-action";
+import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 
 export default function CargarImagenProducto() {
+  const onDrop = useCallback(async (files: File[]) => {
+    const datosForm = new FormData();
+    files.forEach((file) => {
+      datosForm.append("file", file);
+    });
+
+    const imagen = await cargarImagen(datosForm);
+    console.log(imagen);
+  }, []);
+
   const {
     getRootProps,
     getInputProps,
@@ -14,6 +26,8 @@ export default function CargarImagenProducto() {
       "image/jpeg": [".jpg"],
       "image/png": [".png"],
     },
+    onDrop,
+    maxFiles: 1,
   });
   return (
     <>
